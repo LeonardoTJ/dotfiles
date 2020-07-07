@@ -149,6 +149,7 @@ cl() {
 }
 
 source ~/.aliases
+#source ~/.declares
 
 function _update_ps1() {
     PS1=$(powerline-shell $?)
