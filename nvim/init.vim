@@ -16,7 +16,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-commentary'
 Plug 'jiangmiao/auto-pairs'
 Plug 'sheerun/vim-polyglot'
-" Plug 'Yggdroot/indentLine'
+Plug 'Yggdroot/indentLine'
+Plug 'terryma/vim-multiple-cursors'
 Plug 'arcticicestudio/nord-vim'
 " Plug 'vim-scripts/dbext.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -32,6 +33,8 @@ let g:ale_set_highlights = 0
 map <F2> :NERDTreeToggle<CR>
 "let g:NERDSpaceDelims = 1
 "let g:NERDTrimTrailingWhitespace = 1
+let g:indentLine_fileType = ['html']
+" let g:indentLine_enabled = 0
 " let g:indentLine_fileTypeExclude = ['text', 'sh', 'help', 'terminal']
 " let g:indentLine_bufNameExclude = ['NERD_tree.*', 'term:.*']
 " let g:indentLine_concealcursor = 'inc'
