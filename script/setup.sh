@@ -99,6 +99,13 @@ systemctl enable NetworkManager
 # Xorg
 pacman -S --noconfirm xorg-server xorg-xinit
 
+# Configure xinit/bash
+echo "source ~/.bashrc" >> /home/$username/.bash_profile
+echo "if systemctl -q is-active graphical.target \
+	&& {{ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then" >> /home/$username/.bash_profile
+echo "	exec startx" >> /home/$username/.bash_profile
+echo "fi" >> /home/$username/.bash_profile
+
 # Graphics driver
 pacman -S --noconfirm bumblebee
 gpasswd -a $username bumblebee
@@ -106,6 +113,8 @@ systemctl enable bumblebeed
 
 # Window manager
 pacman -S --noconfirm qtile
+
+# Setup qtile
 cp /etc/X11/xinit/xinitrc /home/$username/.xinitrc
 head -n -14 /home/$username/.xinitrc > .xi_temp && mv .xi_temp /home/$username/.xinitrc
 echo "exec qtile" >> /home/$username/.xinitrc

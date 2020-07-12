@@ -44,7 +44,7 @@ sudo pacman -S --noconfirm ttf-dejavu ttf-ibm-plex
 yay -S ttf-blex-nerd-font-git
 
 # Terminal
-sudo pacman -S alacritty
+sudo pacman -S --noconfirm alacritty
 
 # web browser
 sudo pacman -S --noconfirm chromium
