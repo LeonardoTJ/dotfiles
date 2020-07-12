@@ -19,15 +19,15 @@ sed -i 's/^#es_MX.UTF-8/es_MX.UTF-8/' /etc/locale.gen
 sed -i 's/^#en_US.UTF-8/en_US.UTF-8/' /etc/locale.gen
 locale-gen
 echo "LANG=es_MX.UTF-8" > /etc/locale.conf
-echo "LC_ADDRESS=es_MX.UTF-8" > /etc/locale.conf
-echo "LC_IDENTIFICATION=es_MX.UTF-8" > /etc/locale.conf
-echo "LC_MEASUREMENT=es_MX.UTF-8" > /etc/locale.conf
-echo "LC_MONETARY=es_MX.UTF-8" > /etc/locale.conf
-echo "LC_NAME=es_MX.UTF-8" > /etc/locale.conf
-echo "LC_NUMERIC=es_MX.UTF-8" > /etc/locale.conf
-echo "LC_PAPER=es_MX.UTF-8" > /etc/locale.conf
-echo "LC_TELEPHONE=es_MX.UTF-8" > /etc/locale.conf
-echo "LC_TIME=es_MX.UTF-8" > /etc/locale.conf
+echo "LC_ADDRESS=es_MX.UTF-8" >> /etc/locale.conf
+echo "LC_IDENTIFICATION=es_MX.UTF-8" >> /etc/locale.conf
+echo "LC_MEASUREMENT=es_MX.UTF-8" >> /etc/locale.conf
+echo "LC_MONETARY=es_MX.UTF-8" >> /etc/locale.conf
+echo "LC_NAME=es_MX.UTF-8" >> /etc/locale.conf
+echo "LC_NUMERIC=es_MX.UTF-8" >> /etc/locale.conf
+echo "LC_PAPER=es_MX.UTF-8" >> /etc/locale.conf
+echo "LC_TELEPHONE=es_MX.UTF-8" >> /etc/locale.conf
+echo "LC_TIME=es_MX.UTF-8" >> /etc/locale.conf
 
 # Keyboard layout
 echo "KEYMAP=la-latin1" > /etc/vconsole.conf
@@ -107,7 +107,7 @@ systemctl enable bumblebeed
 # Window manager
 pacman -S --noconfirm qtile
 cp /etc/X11/xinit/xinitrc /home/$username/.xinitrc
-head -n 41 /home/$username/.xinitrc > /home/$username/.xinitrc
+head -n -14 /home/$username/.xinitrc > .xi_temp && mv .xi_temp /home/$username/.xinitrc
 echo "exec qtile" >> /home/$username/.xinitrc
 
 # Useful shell utils
