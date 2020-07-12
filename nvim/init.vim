@@ -25,6 +25,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 call plug#end()
 let g:omni_sql_no_default_maps = 1
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#jedi#enable_typeinfo = 0
 " let g:SuperTabDefaultCompletionType = '<c-n>'
 " let g:SuperTabMappingForward = '<c-space>'
 " let g:SuperTabMappingBackward = '<s-c-space>'
@@ -33,7 +34,7 @@ let g:ale_set_highlights = 0
 map <F2> :NERDTreeToggle<CR>
 "let g:NERDSpaceDelims = 1
 "let g:NERDTrimTrailingWhitespace = 1
-let g:indentLine_fileType = ['html']
+let g:indentLine_fileType = ['html', 'python']
 " let g:indentLine_enabled = 0
 " let g:indentLine_fileTypeExclude = ['text', 'sh', 'help', 'terminal']
 " let g:indentLine_bufNameExclude = ['NERD_tree.*', 'term:.*']
