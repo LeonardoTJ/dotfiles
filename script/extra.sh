@@ -4,31 +4,14 @@
 # print command before executing, and exit when any command fails
 set -xe
 
-# Add archlinuxcn repository
-if ! grep 'archlinuxcn' /etc/pacman.conf &> /dev/null; then
+# Install yay AUR helper
+mkdir ~/aur && cd $_
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
 
-  sudo tee /etc/pacman.d/archlinuxcn-mirrorlist <<EOF
-Server = https://mirrors.ustc.edu.cn/archlinuxcn/\$arch
-Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/\$arch
-Server = http://mirrors.cqu.edu.cn/archlinux-cn/\$arch
-Server = http://repo.archlinuxcn.org/\$arch
-EOF
-
-  sudo tee -a /etc/pacman.conf <<EOF
-[archlinuxcn]
-SigLevel = Optional TrustedOnly
-Include = /etc/pacman.d/archlinuxcn-mirrorlist
-EOF
-  sudo pacman -Syy
-  sudo pacman -S --noconfirm archlinuxcn-keyring archlinuxcn-mirrorlist-git
-
-  # Install AUR helper from archlinuxcn repo
-  sudo pacman -S --noconfirm yay
-  # Save yay options
-  yay --save --answerclean None --answerdiff None --answeredit None
-fi
-
-sudo pacman -Syy
+# Save yay options
+yay --save --answerclean None --answerdiff None --answeredit None
 
 # compression/decompression tools
 sudo pacman -S --noconfirm unrar p7zip

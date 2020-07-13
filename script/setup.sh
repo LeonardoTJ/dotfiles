@@ -120,5 +120,5 @@ head -n -14 /home/$username/.xinitrc > .xi_temp && mv .xi_temp /home/$username/.
 echo "exec qtile" >> /home/$username/.xinitrc
 
 # Useful shell utils
-pacman -S --noconfirm bash-completion neovim bind-tools dos2unix rsync wget git tree
+pacman -S --noconfirm bash-completion neovim bind-tools dos2unix rsync wget git tree man-db man-pages
 pacman -S --noconfirm net-tools whois screen inotify-tools perl-rename recode
