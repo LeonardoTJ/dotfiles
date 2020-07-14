@@ -8,8 +8,8 @@ set -xe
 sudo pacman -S --noconfirm python python-pip nodejs npm nasm
 python3 -m pip install --user --upgrade pynvim
 
-# Install yay AUR helper
-mkdir ~/aur && cd $_
+# Install pikaur
+mkdir /tmp/aur && cd $_
 git clone https://github.com/actionless/pikaur.git
 cd pikaur
 python3 ./pikaur.py -S AUR_PACKAGE_NAME

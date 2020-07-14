@@ -4,6 +4,7 @@
 # print command before executing, and exit when any command fails
 set -xe
 
+# hostname
 hostname=arch
 # regular user name
 username=leonardo
