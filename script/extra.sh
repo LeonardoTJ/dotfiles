@@ -6,6 +6,7 @@ set -xe
 
 # Dev stuff
 sudo pacman -S --noconfirm python python-pip nodejs npm nasm
+python3 -m pip install --user --upgrade pynvim
 
 # Install yay AUR helper
 mkdir ~/aur && cd $_
