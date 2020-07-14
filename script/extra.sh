@@ -4,27 +4,27 @@
 # print command before executing, and exit when any command fails
 set -xe
 
+# Dev stuff
+sudo pacman -S --noconfirm python python-pip nodejs npm nasm
+
 # Install yay AUR helper
 mkdir ~/aur && cd $_
-git clone https://aur.archlinux.org/yay.git
-cd yay
-makepkg -si
-
-# Save yay options
-yay --save --answerclean None --answerdiff None --answeredit None
+git clone https://github.com/actionless/pikaur.git
+cd pikaur
+python3 ./pikaur.py -S AUR_PACKAGE_NAME
 
 # compression/decompression tools
 sudo pacman -S --noconfirm unrar p7zip
 
 # unzip-iconv
-yes | yay -S unzip-iconv
+pikaur -S --noconfirm unzip-iconv
 
 # NTFS support
 sudo pacman -S --noconfirm ntfs-3g
 
 # Fonts
 sudo pacman -S --noconfirm ttf-dejavu ttf-ibm-plex
-yay -S ttf-blex-nerd-font-git
+pikaur -S --no-confirm ttf-blex-nerd-font-git
 
 # Terminal
 sudo pacman -S --noconfirm alacritty
@@ -36,7 +36,7 @@ sudo pacman -S --noconfirm chromium
 sudo pacman -S --noconfirm feh mpv cmus
 
 # other utilities
-sudo pacman -S --noconfirm htop ranger zathura redshift xclip python-pip
+sudo pacman -S --noconfirm htop ranger zathura redshift xclip inxi
 
 # automatic date and time
 sudo systemctl enable systemd-timesyncd.service
