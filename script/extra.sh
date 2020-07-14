@@ -36,7 +36,7 @@ sudo pacman -S --noconfirm chromium
 sudo pacman -S --noconfirm feh mpv cmus
 
 # other utilities
-sudo pacman -S --noconfirm htop ranger zathura redshift xclip
+sudo pacman -S --noconfirm htop ranger zathura redshift xclip python-pip
 
 # automatic date and time
 sudo systemctl enable systemd-timesyncd.service
