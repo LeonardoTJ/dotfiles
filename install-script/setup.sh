@@ -30,9 +30,6 @@ echo "LC_PAPER=es_MX.UTF-8" >> /etc/locale.conf
 echo "LC_TELEPHONE=es_MX.UTF-8" >> /etc/locale.conf
 echo "LC_TIME=es_MX.UTF-8" >> /etc/locale.conf
 
-# Keyboard layout
-echo "KEYMAP=la-latin1" > /etc/vconsole.conf
-
 # Hostname
 echo $hostname > /etc/hostname
 
@@ -119,6 +116,9 @@ pacman -S --noconfirm qtile
 cp /etc/X11/xinit/xinitrc /home/$username/.xinitrc
 head -n -14 /home/$username/.xinitrc > /tmp/.xi_temp && mv /tmp/.xi_temp /home/$username/.xinitrc
 echo "exec qtile" >> /home/$username/.xinitrc
+
+# Keyboard layout
+setxkbmap latam
 
 # Useful shell utils
 pacman -S --noconfirm bash-completion neovim bind-tools dos2unix rsync wget git tree man-db man-pages
