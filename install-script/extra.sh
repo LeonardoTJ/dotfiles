@@ -10,9 +10,9 @@ python3 -m pip install --user --upgrade pynvim
 
 # Install pikaur
 mkdir /tmp/aur && cd $_
-git clone https://github.com/actionless/pikaur.git
+git clone https://aur.archlinux.org/pikaur.git
 cd pikaur
-python3 ./pikaur.py -S AUR_PACKAGE_NAME
+makepkg --noconfirm -fsri
 
 # compression/decompression tools
 sudo pacman -S --noconfirm unrar p7zip
@@ -37,7 +37,8 @@ sudo pacman -S --noconfirm chromium
 sudo pacman -S --noconfirm feh mpv cmus
 
 # other utilities
-sudo pacman -S --noconfirm htop ranger zathura redshift xclip inxi
+sudo pacman -S --noconfirm htop ranger zathura redshift xclip
+pikaur -S --noconfirm inxi
 
 # automatic date and time
 sudo systemctl enable systemd-timesyncd.service
