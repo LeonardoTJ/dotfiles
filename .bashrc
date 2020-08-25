@@ -148,5 +148,6 @@ cl() {
 	fi
 }
 
+setxkbmap latam
 source ~/.aliases
 #source ~/.declares
