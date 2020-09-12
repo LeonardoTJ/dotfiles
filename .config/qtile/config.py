@@ -25,12 +25,14 @@
 # SOFTWARE.
 
 from libqtile.config import Key, Screen, Group, Drag, Click
-from libqtile.lazy import lazy
-from libqtile import layout, bar, widget
+from libqtile.command import lazy
+from libqtile import layout, bar, widget, hook
 
 from typing import List  # noqa: F401
 
 mod = "mod4"
+myTerm = "alacritty"
+# myConfig = "/home/leonardo/.config/qtile/config.py"
 
 keys = [
     # Switch between windows in current stack pane
@@ -52,41 +54,43 @@ keys = [
     # Unsplit = 1 window displayed, like Max layout, but still with
     # multiple stack panes
     Key([mod, "shift"], "Return", lazy.layout.toggle_split()),
-    Key([mod], "Return", lazy.spawn("alacritty")),
+    Key([mod], "Return", lazy.spawn(myTerm)),
 
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout()),
-    Key([mod], "w", lazy.window.kill()),
+    Key([mod], "q", lazy.window.kill()),
 
     Key([mod, "control"], "r", lazy.restart()),
     Key([mod, "control"], "q", lazy.shutdown()),
     Key([mod], "r", lazy.spawncmd()),
 
-    Key([mod], "W", lazy.spawn("chromium")),
+    Key([mod], "w", lazy.spawn("chromium")),
 ]
 
-groups = [Group(i) for i in "asdfuiop"]
+group_names = [("web", {'layout': 'monadtall'}),
+               ("files", {'layout': 'monadtall'}),
+               ("media", {'layout': 'monadtall'})]
 
-for i in groups:
-    keys.extend([
-        # mod1 + letter of group = switch to group
-        Key([mod], i.name, lazy.group[i.name].toscreen()),
+groups = [Group(name, **kwargs) for name, kwargs in group_names]
 
-        # mod1 + shift + letter of group = switch to & move focused window to group
-        Key([mod, "shift"], i.name, lazy.window.togroup(i.name, switch_group=True)),
-        # Or, use below if you prefer not to switch to that group.
-        # # mod1 + shift + letter of group = move focused window to group
-        # Key([mod, "shift"], i.name, lazy.window.togroup(i.name)),
-    ])
+for i, (name, kwargs) in enumerate(group_names, 1):
+    keys.append(Key([mod], str(i), lazy.group[name].toscreen()))
+    keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name)))
+
+layout_theme = {"border_width": 2,
+                # "margin": 1,
+                "border_focus": "e1acff",
+                "border_normal": "1D2330"
+                }
 
 layouts = [
-    layout.Max(),
-    layout.Stack(num_stacks=2),
+    layout.Max(**layout_theme),
+    layout.Stack(num_stacks=2, **layout_theme),
     # Try more layouts by unleashing below layouts.
     # layout.Bsp(),
     # layout.Columns(),
     # layout.Matrix(),
-    # layout.MonadTall(),
+    layout.MonadTall(**layout_theme),
     # layout.MonadWide(),
     # layout.RatioTile(),
     # layout.Tile(),
@@ -95,29 +99,112 @@ layouts = [
     # layout.Zoomy(),
 ]
 
+colors = [["#292d3e", "#292d3e"],
+          ["#434758", "#434758"],
+          ["#ffffff", "#ffffff"],
+          ["#ff5555", "#ff5555"],
+          ["#8d62a9", "#8d62a9"],
+          ["#668bd7", "#668bd7"],
+          ["#elacff", "#elacff"]]
+
 widget_defaults = dict(
-    font='sans',
+    font="Blex Mono Nerd Font",
     fontsize=12,
-    padding=3,
+    padding=2,
+    background=colors[0]
 )
 extension_defaults = widget_defaults.copy()
 
+def init_widgets_list():
+    widgets_list = [
+              widget.CurrentLayout(
+                       foreground = colors[2],
+                       background = colors[4],
+                       padding = 5
+                       ),
+              widget.GroupBox(
+                       font = "Blex Mono Nerd Font",
+                       fontsize = 9,
+                       margin_y = 3,
+                       margin_x = 0,
+                       padding_y = 5,
+                       padding_x = 3,
+                       borderwidth = 3,
+                       active = colors[2],
+                       inactive = colors[2],
+                       rounded = False,
+                       highlight_color = colors[1],
+                       highlight_method = "line",
+                       this_current_screen_border = colors[3],
+                       this_screen_border = colors [4],
+                       other_current_screen_border = colors[0],
+                       other_screen_border = colors[0],
+                       foreground = colors[2],
+                       background = colors[0]
+                       ),
+              widget.Prompt(
+                       # prompt = prompt,
+                       font = "Blex Mono Nerd Font",
+                       padding = 10,
+                       foreground = colors[3],
+                       background = colors[1]
+                       ),
+              widget.Sep(
+                       linewidth = 0,
+                       padding = 40,
+                       foreground = colors[2],
+                       background = colors[0]
+                       ),
+              widget.WindowName(
+                       foreground = colors[2],
+                       background = colors[0],
+                       padding = 0
+                       ),
+              widget.Sep(
+                       linewidth = 0,
+                       padding = 40,
+                       foreground = colors[2],
+                       background = colors[0]
+                       ),
+              widget.TextBox(
+                      text = "[",
+                       foreground = colors[2],
+                       background = colors[5],
+                       padding = 0
+                       ),
+              widget.Volume(
+                       foreground = colors[2],
+                       background = colors[5],
+                       padding = 5
+                       ),
+              widget.TextBox(
+                      text = "]",
+                       foreground = colors[2],
+                       background = colors[5],
+                       padding = 0
+                       ),
+              widget.Clock(
+                       foreground = colors[2],
+                       background = colors[5],
+                       format = "%A, %B %d  [ %H:%M ]"
+                       ),
+              widget.Sep(
+                       linewidth = 0,
+                       padding = 10,
+                       foreground = colors[0],
+                       background = colors[5]
+                       ),
+              widget.Systray(
+                       background = colors[0],
+                       padding = 5
+                       )
+              ]
+    return widgets_list
+
 screens = [
     Screen(
-        bottom=bar.Bar(
-            [
-                widget.CurrentLayout(),
-                widget.GroupBox(),
-                widget.Prompt(),
-                widget.WindowName(),
-                widget.TextBox("default config", name="default"),
-                widget.Systray(),
-                widget.Clock(format='%Y-%m-%d %a %I:%M %p'),
-                widget.QuickExit(),
-            ],
-            24,
-        ),
-    ),
+        bottom=bar.Bar(widgets=init_widgets_list(), opacity=1.0, size=20)
+    )
 ]
 
 # Drag floating layouts.
@@ -154,6 +241,11 @@ floating_layout = layout.Floating(float_rules=[
 ])
 auto_fullscreen = True
 focus_on_window_activation = "smart"
+
+@hook.subscribe.startup_once
+def start_once():
+    home = os.path.expanduser('~')
+    subprocess.call([home + '/.config/qtile/autostart.sh'])
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the

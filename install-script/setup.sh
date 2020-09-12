@@ -110,6 +110,7 @@ gpasswd -a $username bumblebee
 systemctl enable bumblebeed
 
 # Window manager
+pacman -S --noconfirm picom nitrogen
 pacman -S --noconfirm qtile
 
 # Setup qtile
