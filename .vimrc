@@ -2,7 +2,7 @@ syntax on
 filetype on
 set number
 set ruler
-set wrap
+"set wrap
 set showmatch
 set ignorecase
 set incsearch
@@ -29,6 +29,8 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
+vmap <C-P> y'>p
 
 set tabstop=4
 set expandtab

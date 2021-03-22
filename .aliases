@@ -1,4 +1,3 @@
-alias cmus='cd ~/Música; cmus'
 alias cp='cp -i'
 alias df='df -h'
 alias egrep='egrep --colour=auto'

@@ -9,10 +9,10 @@
 
 [user]
 	email = leonardo.melendez@uabc.edu.mx
-	name = Leonardo Meléndez
+	name  = Leonardo Meléndez
 [core]
 	editor = nvim
 [credential]
-	helper = cache --timeout=3600
+    helper = cache --timeout=3600
 [color]
     ui = auto
