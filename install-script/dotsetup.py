@@ -1,4 +1,4 @@
-#import glob
+#!/usr/bin/env python3
 import pathlib
 import subprocess
 import os
