@@ -25,17 +25,15 @@ choco install aimp -y
 
 # Security
 choco install malwarebytes -y
-choco install keepassxc -y
 
 # Dev
 choco install git -y
 choco install python -y
 choco install notepadplusplus -y
-choco install vscodium -y
-choco install microsoft-windows-terminal -y
+choco install vscode -y
 
 # Internet
-choco install chromium -y
+choco install firefox -y
 choco install qbittorrent -y
 
 # Games
@@ -48,6 +46,3 @@ choco install curl -y
 choco install wget -y
 choco install windirstat -y
 choco install rufus -y
-choco install bleachbit -y
-choco install Everything -y
-choco install f.lux -y
